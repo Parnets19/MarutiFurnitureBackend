@@ -3,9 +3,9 @@ const Testimonials = require("../model/Testimonials");
 // ➕ Add Testimonial
 exports.addTestimonials = async (req, res) => {
   try {
-    const { text, name, designation } = req.body;
+    const { text, name, designation, rating } = req.body;
 
-    const testimonials = new Testimonials({ text, name, designation });
+    const testimonials = new Testimonials({ text, name, designation, rating });
     await testimonials.save();
 
     res.status(201).json({ message: "Testimonial added successfully" });
@@ -30,9 +30,9 @@ exports.getTestimonials = async (req, res) => {
 exports.updateTestimonials = async (req, res) => {
   try {
     const { id } = req.params;
-    const { text, name, designation } = req.body;
+    const { text, name, designation, rating } = req.body;
 
-    const updatedData = { text, name, designation };
+    const updatedData = { text, name, designation, rating };
 
     const updatedTestimonials = await Testimonials.findByIdAndUpdate(
       id,
