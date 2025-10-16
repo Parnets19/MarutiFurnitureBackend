@@ -24,7 +24,14 @@ app.use("/api/products", productRoutes);
 app.use("/api/contactcards", contactcardRoutes);
 app.use("/api/contactforms", contactformRoutes);
 app.use("/api/testimonials", testimonialsRoutes)
+ 
+app.use(express.static(path.join(__dirname, 'build'))); // Change 'build' to your frontend folder if needed
 
+// Redirect all requests to the index.html file
+
+app.get("*", (req, res) => {
+  return res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.listen(process.env.PORT, () => {
   console.log("Server is runnning on port " + process.env.PORT);
